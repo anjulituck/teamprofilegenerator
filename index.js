@@ -1,6 +1,7 @@
 
 const inquirer = require("inquirer");
 const fs = require("fs");
+const { type } = require("os");
 
 //prompts 
 
@@ -32,6 +33,39 @@ function teamMenu(){
 
             
     } 
+    function position(){
+        inquirer
+            .prompt([
+                {
+                    type:'confirm',
+                    name:'manager',
+                    message:`Are you a manager?`,
+                    validate: checkManager (input) => {
+                        if (input == 'y'){
+                            return managerInfo();
+                        }
+                    }
+                },
+                {
+                    type: 'list',
+                    name:'position',
+                    message:`What is your position?`
+                    choices:[Engineer, Intern]
+                },
+                {
+                    type: 'confirm',
+                    name:'addEmployee',
+                    message:`Would you liike to add another employee?`
+                    validate: addEmployee(confirm) => {
+                        if (confirm == 'y'){
+                            return position();
+                        }
+                    }
+                }                   
+            ]) 
+
+            
+    } 
 
     function engineerInfo(){
         inquirer
@@ -40,6 +74,11 @@ function teamMenu(){
                     type: 'input',
                     name:'name',
                     message:`What is your engineer's name?`
+                },
+                {
+                    type: 'input',
+                    name:'id',
+                    message:`What is your engineer's id?`
                 },
                 {
                     type: 'input',
@@ -56,7 +95,36 @@ function teamMenu(){
             
     } 
 
+    function internInfo(){
+        inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    name:'name',
+                    message:`What is the intern's name?`
+                },
+                {
+                    type: 'input',
+                    name:'id',
+                    message:`What is the intern's id?`
+                },
+                {
+                    type: 'input',
+                    name:'email',
+                    message:`What is the intern's email?`
+                },
+                {
+                    type: 'input',
+                    name:'github',
+                    message:`What is your github profile link?`
+                }
+            ]) 
+
+            
+    } 
     managerInfo();
+    engineerInfo();
+    internInfo();
 }
 
 
