@@ -2,10 +2,23 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const { type } = require("os");
+const Manager = require("./lib/Manager");
 
 //prompts 
 
 function teamMenu(){
+
+    function teamBuild(){
+        inquirer
+            .prompt([
+                {
+                    type: 'list',
+                    name:'team',
+                    message: 'Would you like to add an employee or finish builidng the team?',
+                    choices:['Engineer', 'Intern', 'No, I am finished building my team.']
+                
+                }
+            ])
     function managerInfo(){
         inquirer
             .prompt([
@@ -29,38 +42,46 @@ function teamMenu(){
                     name:'managerOfficeNumber',
                     message:`What is your manager's office number?`
                 }
+
             ]) 
 
+            .then((answers) => {
+                const newManager = new Manager(
+                    answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeManager
+                )
+                // to be it's own function outside
+                teamBuild();
+            })
+            
+        .then((answers)=> {
+            if (answers.team === 'Engineer'){
+                engineerInfo();
+            }else if( answers.team === 'Intern') {
+                internInfo();
+            }else{
+                // HTML function to generate
+            }
+        })    
             
     } 
     function position(){
         inquirer
             .prompt([
                 {
-                    type:'confirm',
-                    name:'manager',
-                    message:`Are you a manager?`,
-                    validate: checkManager (input) => {
-                        if (input == 'y'){
-                            return managerInfo();
-                        }
-                    }
-                },
-                {
                     type: 'list',
                     name:'position',
-                    message:`What is your position?`
-                    choices:[Engineer, Intern]
+                    message:`What is your position?`,
+                    choices:['Engineer', 'Intern']
                 },
                 {
                     type: 'confirm',
                     name:'addEmployee',
-                    message:`Would you liike to add another employee?`
-                    validate: addEmployee(confirm) => {
-                        if (confirm == 'y'){
-                            return position();
-                        }
-                    }
+                    message:`Would you like to add another employee?`
+                    // validate: addEmployee(confirm) => {
+                    //     if (confirm == 'y'){
+                    //         return position();
+                    //     }
+                    // }
                 }                   
             ]) 
 
