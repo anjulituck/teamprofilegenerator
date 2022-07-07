@@ -20,3 +20,7 @@ test('checks employee id within object',() => {
 test('checks email within object',() => {
     expect(employee.getEmail()).toBe('juliat@gmail.com');
 });
+
+test('checks role within object',() => {
+    expect(employee.getRole()).toBe('Employee');
+});
