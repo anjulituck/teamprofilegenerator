@@ -6,7 +6,7 @@ test('checks if Intern values matches', () => {
  expect(intern.name).toBe('julia');
  expect(intern.email).toBe('juliat@gmail.com');
  expect(intern.id).toBe('123456');
- expect(intern.school).toBe('Standford');
+ expect(intern.school).toBe('Stanford');
 });
 
 test('checks name within object',() => {

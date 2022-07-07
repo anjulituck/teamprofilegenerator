@@ -1,5 +1,5 @@
 //variables for checking Manager object
-const checkManager = require('../lib/Engineer');
+const checkManager = require('../lib/Manager');
 const manager = new checkManager('julia','123456','juliat@gmail.com','5103669090');
 
 test('checks if Manager values matches', () => {

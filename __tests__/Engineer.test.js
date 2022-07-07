@@ -6,7 +6,7 @@ test('checks if Engineer values matches', () => {
  expect(engineer.name).toBe('julia');
  expect(engineer.email).toBe('juliat@gmail.com');
  expect(engineer.id).toBe('123456');
- expect(engineer.school).toBe('Standford');
+ expect(engineer.github).toBe('github.com/juliat');
 });
 
 test('checks name within object',() => {
@@ -22,7 +22,7 @@ test('checks email within object',() => {
 });
 
 test('checks github within object',() => {
-    expect(engineer.getSchool()).toBe('github.com/juliat');
+    expect(engineer.getGithub()).toBe('github.com/juliat');
 });
 
 test('checks role within object',() => {

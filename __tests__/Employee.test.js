@@ -1,5 +1,5 @@
 //variables for checking Employee object
-const checkEmployee = require('../lib/Engineer');
+const checkEmployee = require('../lib/Employee');
 const employee = new checkEmployee('julia','123456','juliat@gmail.com');
 
 test('checks if Employee values matches', () => {
