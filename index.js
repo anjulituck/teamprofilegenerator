@@ -4,6 +4,7 @@ const fs = require("fs");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const generateHTML = require("./utils/generateHTML");
 
 //prompts 
 
@@ -25,22 +26,22 @@ function teamMenu(){
             .prompt([
                 {
                     type: 'input',
-                    name:'managerName',
+                    name:'name',
                     message:`What is your manager's name? (REQUIRED)`
                 },
                 {
                     type: 'input',
-                    name:'managerId',
+                    name:'id',
                     message:`What is your manager's id? (REQUIRED)`
                 },
                 {
                     type: 'input',
-                    name:'managerEmail',
+                    name:'email',
                     message:`What is your manager's email? (REQUIRED)`
                 },
                 {
                     type: 'input',
-                    name:'managerOfficeNumber',
+                    name:'officeNumber',
                     message:`What is your manager's office number? (REQUIRED)`
                 }
 
@@ -61,6 +62,7 @@ function teamMenu(){
                 internInfo();
             }else{
                 // HTML function to generate
+                writeToFile('README.md', generateMarkdown({...responses}))
             }
         })    
             
@@ -111,7 +113,7 @@ function teamMenu(){
                 {
                     type: 'input',
                     name:'github',
-                    message:`What is your github profile link? (REQUIRED)`
+                    message:`What is your github username ? (REQUIRED)`
                 }
             ]) 
 
@@ -138,8 +140,8 @@ function teamMenu(){
                 },
                 {
                     type: 'input',
-                    name:'github',
-                    message:`What is your github profile link? (REQUIRED)`
+                    name:'school',
+                    message:`What school do you attend? (REQUIRED)`
                 }
             ]) 
 
@@ -151,4 +153,14 @@ function teamMenu(){
 }
 
 }
+
+// function to write HTML file
+const writeToFile = (fileName, data) => {
+    return fs.writeFile(fileName,data, function(err) {
+    if (err) return console.log(err);
+    //console.log('Hello World');
+    })
+   };
+   
+
 teamMenu();

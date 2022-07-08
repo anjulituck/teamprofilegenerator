@@ -41,4 +41,4 @@ TBA
 
 ## Tests
 
-TBA
+We have 4 tests to check the values of the Employee, Manager, Engineer and Intern information. All tests passed.

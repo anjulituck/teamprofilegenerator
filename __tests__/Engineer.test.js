@@ -1,12 +1,12 @@
 //variables for checking Engineer object
 const checkEngineer = require('../lib/Engineer');
-const engineer = new checkEngineer('julia','123456','juliat@gmail.com','github.com/juliat');
+const engineer = new checkEngineer('julia','123456','juliat@gmail.com','juliat');
 
 test('checks if Engineer values matches', () => {
  expect(engineer.name).toBe('julia');
  expect(engineer.email).toBe('juliat@gmail.com');
  expect(engineer.id).toBe('123456');
- expect(engineer.github).toBe('github.com/juliat');
+ expect(engineer.github).toBe('juliat');
 });
 
 test('checks name within object',() => {
@@ -22,7 +22,7 @@ test('checks email within object',() => {
 });
 
 test('checks github within object',() => {
-    expect(engineer.getGithub()).toBe('github.com/juliat');
+    expect(engineer.getGithub()).toBe('juliat');
 });
 
 test('checks role within object',() => {
