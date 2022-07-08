@@ -49,7 +49,7 @@ function teamMenu(){
 
             .then((answers) => {
                 const newManager = new Manager(
-                    answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeManager
+                    answers.name, answers.id, answers.email, answers.officeNumber
                 )
                 // to be it's own function outside
                 teamBuild();
@@ -62,33 +62,9 @@ function teamMenu(){
                 internInfo();
             }else{
                 // HTML function to generate
-                writeToFile('README.md', generateMarkdown({...responses}))
+                writeToFile('README.md', generateHTML({...responses}))
             }
         })    
-            
-    } 
-    function position(){
-        inquirer
-            .prompt([
-                {
-                    type: 'list',
-                    name:'position',
-                    message:`What is your position? (REQUIRED)`,
-                    choices:['Engineer', 'Intern']
-                },
-                {
-                    type: 'confirm',
-                    name:'addEmployee',
-                    message:`Would you like to add another employee?`,
-                    choices:['Engineer', 'Intern', 'No, I am finished building my team.']
-                    // validate: addEmployee(confirm) => {
-                    //     if (confirm == 'y'){
-                    //         return position();
-                    //     }
-                    // }
-                }                   
-            ]) 
-
             
     } 
 
@@ -116,6 +92,14 @@ function teamMenu(){
                     message:`What is your github username ? (REQUIRED)`
                 }
             ]) 
+
+            .then((answers) => {
+                const newEngineer = new Engineer(
+                    answers.name, answers.id, answers.email, answers.github
+                )
+                // to be it's own function outside
+                teamBuild();
+            })
 
             
     } 
@@ -145,6 +129,14 @@ function teamMenu(){
                 }
             ]) 
 
+            .then((answers) => {
+                const newIntern = new Intern(
+                    answers.name, answers.id, answers.email, answers.school
+                )
+                // to be it's own function outside
+                teamBuild();
+            })
+
             
     } 
     managerInfo();
@@ -154,13 +146,13 @@ function teamMenu(){
 
 }
 
-// function to write HTML file
-const writeToFile = (fileName, data) => {
-    return fs.writeFile(fileName,data, function(err) {
-    if (err) return console.log(err);
-    //console.log('Hello World');
-    })
-   };
+// // function to write HTML file
+// const writeToFile = (fileName, teamMenu) => {
+//     return fs.writeFile(fileName,teamMenu, function(err) {
+//     if (err) return console.log(err);
+//     //console.log('Hello World');
+//     })
+//    };
    
 
 teamMenu();

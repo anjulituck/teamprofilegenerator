@@ -37,7 +37,7 @@ To install the app, please install Node and Jest by npm i and node install jest.
 
 ## Walkthrough Video
 
-TBA
+https://www.loom.com/share/365d1b25693c4047aa6471a245020953
 
 ## Tests
 
