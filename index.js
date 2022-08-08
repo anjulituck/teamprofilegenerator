@@ -8,22 +8,10 @@ const generateHTML = require("./utils/generateHTML");
 
 //prompts 
 
-function teamMenu(){
+const teamMembers =[];
 
-    function teamBuild(){
-        inquirer
-            .prompt([
-                {
-                    type: 'list',
-                    name:'team',
-                    message: 'Would you like to add an employee or finish builidng the team?',
-                    choices:['Engineer', 'Intern', 'No, I am finished building my team.']
-                
-                }
-            ])
-    function managerInfo(){
-        inquirer
-            .prompt([
+function managerInfo(){
+    const answers = inquirer.prompt([
                 {
                     type: 'input',
                     name:'name',
@@ -51,26 +39,38 @@ function teamMenu(){
                 const newManager = new Manager(
                     answers.name, answers.id, answers.email, answers.officeNumber
                 )
+                teamMembers.push(newManager);
                 // to be it's own function outside
-                teamBuild();
+                chooseEmployee();
             })
-            
-        .then((answers)=> {
-            if (answers.team === 'Engineer'){
-                engineerInfo();
-            }else if( answers.team === 'Intern') {
-                internInfo();
-            }else{
-                // HTML function to generate
-                writeToFile('README.md', generateHTML({...responses}))
-            }
-        })    
-            
-    } 
 
-    function engineerInfo(){
-        inquirer
-            .prompt([
+        }
+
+function chooseEmployee(){
+    const answers = inquirer.prompt([
+        {
+            type: 'list',
+            name:'team',
+            message: 'Would you like to add an employee or finish builidng the team?',
+            choices:['Engineer', 'Intern', 'No, I am finished building my team.']
+        
+        }
+    ])
+
+    .then((answers)=> {
+        if (answers.team === 'Engineer'){
+            engineerInfo();
+        }else if( answers.team === 'Intern') {
+            internInfo();
+        }else{
+            // HTML function to generate
+            return run();
+        }
+    })    
+}
+
+function engineerInfo(){
+        const answers = inquirer.prompt([
                 {
                     type: 'input',
                     name:'name',
@@ -98,15 +98,14 @@ function teamMenu(){
                     answers.name, answers.id, answers.email, answers.github
                 )
                 // to be it's own function outside
-                teamBuild();
+                teamMembers.push(newEngineer);
+                run();
             })
 
-            
     } 
 
-    function internInfo(){
-        inquirer
-            .prompt([
+function internInfo(){
+    const answers = inquirer.prompt([
                 {
                     type: 'input',
                     name:'name',
@@ -134,25 +133,22 @@ function teamMenu(){
                     answers.name, answers.id, answers.email, answers.school
                 )
                 // to be it's own function outside
-                teamBuild();
+                teamMembers.push(newIntern);
+                run();
             })
 
             
     } 
-    managerInfo();
-    engineerInfo();
-    internInfo();
-}
 
-}
+function run(){
+    const html = generateHTML(teamMembers);
+    fs.writeFile('./dist/index.html',html),(err => {
+        if(err){
+            console.log(err);
+        }else {
+            chooseEmmployee();
+        }
+    })
+};
 
-// // function to write HTML file
-// const writeToFile = (fileName, teamMenu) => {
-//     return fs.writeFile(fileName,teamMenu, function(err) {
-//     if (err) return console.log(err);
-//     //console.log('Hello World');
-//     })
-//    };
-   
-
-teamMenu();
+managerInfo();

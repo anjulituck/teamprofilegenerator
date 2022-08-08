@@ -1,11 +1,11 @@
 //variables for checking Intern object
 const checkIntern = require('../lib/Intern');
-const intern = new checkIntern('julia','123456','juliat@gmail.com','Stanford');
+const intern = new checkIntern('julia',123456,'juliat@gmail.com','Stanford');
 
 test('checks if Intern values matches', () => {
  expect(intern.name).toBe('julia');
  expect(intern.email).toBe('juliat@gmail.com');
- expect(intern.id).toBe('123456');
+ expect(intern.id).toBe(123456);
  expect(intern.school).toBe('Stanford');
 });
 
@@ -14,7 +14,7 @@ test('checks name within object',() => {
 });
 
 test('checks employee id within object',() => {
-    expect(intern.getId()).toBe('123456');
+    expect(intern.getId()).toBe(123456);
 });
 
 test('checks email within object',() => {
