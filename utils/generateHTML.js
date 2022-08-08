@@ -1,4 +1,4 @@
-function myTeamHTML(teamMembers){
+function generateHTML(teamMembers){
   let cards = "";
   for (let i = 0; i < teamMembers.length; i++) {
       const currentEmployee = teamMembers[i];
@@ -52,6 +52,7 @@ function generateManager(manager){
             </div>
         </div>
   </section>`
+  return card;
 }
 
 // generate Engineer information
@@ -73,7 +74,7 @@ function generateEngineer(engineer){
    </div>
 </div>
 </section>`
-
+return card;
 }
 
 // generate Intern information
@@ -95,6 +96,7 @@ function generateIntern(intern){
    </div>
 </div>
 </section>`
+return card;
 }
 
 

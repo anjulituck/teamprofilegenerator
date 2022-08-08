@@ -142,11 +142,11 @@ function internInfo(){
 
 function run(){
     const html = generateHTML(teamMembers);
-    fs.writeFile('./dist/index.html',html),(err => {
+    fs.writeFile('./dist/index.html',html,err => {
         if(err){
-            console.log(err);
+            return console.log(err);
         }else {
-            chooseEmmployee();
+            chooseEmployee();
         }
     })
 };
