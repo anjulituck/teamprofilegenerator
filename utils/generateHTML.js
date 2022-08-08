@@ -1,8 +1,41 @@
-const myTeam = myTeam => {
+function myTeamHTML(teamMembers){
+  let cards = "";
+  for (let i = 0; i < teamMembers.length; i++) {
+      const currentEmployee = teamMembers[i];
+      if (currentEmployee.getRole() === "Manager") {
+          cards += generateManager(currentEmployee);
+      } else if (currentEmployee.getRole() === "Engineer") {
+          cards += generateEngineer(currentEmployee);
+      } else if (currentEmployee.getRole() === "Intern") {
+          cards += generateIntern(currentEmployee);
+      }
+  }
+
+  const html = `<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>TEAM PROFILE GENERATOR</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+      </head>
+      <body>
+      <!--TITLE HEADER-->  
+      <section class="section has-background-danger">
+        <div class="container has-text-centered">
+          <h1 class="title is-1 has-text-white" >
+          </h1>
+        </div>
+      </section>
+       ${cards}
+      </body>
+      </html>`;
+return html;
+};
 
 // generate Manager information
-const generateManager = (manager) => {
-    return ` <section class="section has-background-white">
+function generateManager(manager){
+    const card = ` <section class="section has-background-white">
              <div class="card">
                 <header class="card-header has-background-info">
                     <h2 class="card-header-title has-text-white title is-3">
@@ -22,8 +55,8 @@ const generateManager = (manager) => {
 }
 
 // generate Engineer information
-const generateEngineer = (engineer) => {
-    return ` <section class="section has-background-white">
+function generateEngineer(engineer){
+    const card = ` <section class="section has-background-white">
     <div class="card">
        <header class="card-header has-background-info">
            <h2 class="card-header-title has-text-white title is-3">
@@ -44,8 +77,8 @@ const generateEngineer = (engineer) => {
 }
 
 // generate Intern information
-const generateIntern = (intern) => {
-    return ` <section class="section has-background-white">
+function generateIntern(intern){
+    const card= ` <section class="section has-background-white">
     <div class="card">
        <header class="card-header has-background-info">
            <h2 class="card-header-title has-text-white title is-3">
@@ -63,36 +96,6 @@ const generateIntern = (intern) => {
 </div>
 </section>`
 }
-};
 
-// // function to create HTMl
-// function generateHTML(data) {
 
-// }
-
-//exporting function
-module.exports = generateHTML => {
-    return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>TEAM PROFILE GENERATOR</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-      </head>
-      <body>
-      <!--TITLE HEADER-->  
-      <section class="section has-background-danger">
-        <div class="container has-text-centered">
-          <h1 class="title is-1 has-text-white" >
-            {myTeam(generateHTML)}
-          </h1>
-        </div>
-      </section>
-       {}
-      </body>
-      </html>
-    `
-
-}
+module.exports = generateHTML;
